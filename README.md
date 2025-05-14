@@ -7,5 +7,6 @@ Each link below leads to a dedicated README containing detailed solutions for th
 
 ## 🗓️ 2025
 
+- [DamCTF 2025](./2025/damctf/README.md)
 - [DawgCTF 2025](./2025/dawgctf/README.md)
 - [UMDCTF 2025](./2025/umdctf/README.md)
