@@ -11,5 +11,6 @@ Each link below leads to a dedicated README containing detailed solutions for th
 - [DawgCTF 2025](./2025/dawgctf/README.md)
 - [GPN CTF 2025](./2025/gpn-ctf/README.md)
 - [L3akCTF 2025](./2025/l3akctf/README.md)
+- [Nullcon Berlin HackIM 2025 CTF](./2025/nullcon-berlin-hackim-ctf/README.md)
 - [UIUCTF 2025](./2025/uiuctf/README.md)
 - [UMDCTF 2025](./2025/umdctf/README.md)
