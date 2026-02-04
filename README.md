@@ -1,11 +1,10 @@
- # CTF Writeups
+# CTF Writeups
 
-This repository contains writeups for various Capture The Flag (CTF) competitions.  
-Each link below leads to a dedicated README containing detailed solutions for that specific CTF.
+## 2026
 
----
+- [PascalCTF 2026](./2026/pascalctf/README.md)
 
-## 🗓️ 2025
+## 2025
 
 - [DamCTF 2025](./2025/damctf/README.md)
 - [DawgCTF 2025](./2025/dawgctf/README.md)
