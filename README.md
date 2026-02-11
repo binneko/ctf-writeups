@@ -2,6 +2,7 @@
 
 ## 2026
 
+- [LA CTF 2026](./2026/la-ctf/README.md)
 - [PascalCTF 2026](./2026/pascalctf/README.md)
 
 ## 2025
