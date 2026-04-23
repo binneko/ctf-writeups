@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northstar Workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="bg"></div>
+  <main class="shell center page-shell">
+    <section class="panel page-panel wide">
+      <div class="topbar">
+        <div>
+          <div class="brand">Northstar Workspace</div>
+          <h2>{{ user['full_name'] }}</h2>
+          <p class="intro-copy">{{ user['title'] }} · {{ user['team'] }}</p>
+        </div>
+        <div class="actions">
+          <a class="buttonlink secondary small" href="{{ url_for('profile') }}">Profile</a>
+          {% if user['role'] == 'admin' %}
+          <a class="buttonlink small" href="{{ url_for('admin') }}">Admin</a>
+          {% endif %}
+          <a class="buttonlink ghost small" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+      </div>
+
+      <div class="grid-three metrics">
+        <div class="tile column"><span>Open tasks</span><strong>14</strong></div>
+        <div class="tile column"><span>Team approvals</span><strong>5</strong></div>
+        <div class="tile column"><span>Weekly health</span><strong>92%</strong></div>
+      </div>
+
+      <div class="grid-two dashboard-grid">
+        <section class="subpanel">
+          <div class="subhead">Account overview</div>
+          <div class="list-item"><span>Username</span><strong>{{ user['username'] }}</strong></div>
+          <div class="list-item"><span>Role</span><strong>{{ user['role'] }}</strong></div>
+          <div class="list-item"><span>Team</span><strong>{{ user['team'] }}</strong></div>
+          <div class="list-item"><span>Workspace</span><strong>Operations</strong></div>
+        </section>
+        <section class="subpanel">
+          <div class="subhead">Recent projects</div>
+          <div class="project-card"><span>Revenue forecasting refresh</span><em>In review</em></div>
+          <div class="project-card"><span>APAC vendor migration</span><em>On track</em></div>
+          <div class="project-card"><span>Q3 planning workbook</span><em>Drafting</em></div>
+        </section>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

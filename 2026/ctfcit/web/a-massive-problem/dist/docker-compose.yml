@@ -1,0 +1,9 @@
+services:
+  a-massive-problem:
+    build: .
+    ports:
+      - "5556:5000"
+    environment:
+      FLAG: CIT{test_flag}
+      SECRET_KEY: test-session-key
+      DATABASE: /app/data.db

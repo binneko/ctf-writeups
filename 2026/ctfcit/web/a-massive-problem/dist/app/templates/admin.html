@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Console</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="bg"></div>
+  <main class="shell center page-shell admin-shell">
+    <section class="panel page-panel admin-panel glow">
+      <div class="topbar">
+        <div>
+          <div class="brand">Northstar Admin</div>
+          <h2>Administrator console</h2>
+          <p class="intro-copy">Restricted workspace controls</p>
+        </div>
+        <div class="actions">
+          <a class="buttonlink secondary small" href="{{ url_for('dashboard') }}">Dashboard</a>
+          <a class="buttonlink ghost small" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+      </div>
+      <section class="admin-hero">
+        <div class="admin-badge">Administrator session</div>
+        <div class="admin-title-row">
+          <div>
+            <div class="admin-label">Active operator</div>
+            <div class="admin-name">{{ username }}</div>
+          </div>
+          <div class="admin-pill">Global workspace</div>
+        </div>
+      </section>
+      <section class="admin-metrics">
+        <div class="metric-card"><span>Access level</span><strong>Administrator</strong></div>
+        <div class="metric-card"><span>Approval queue</span><strong>18 pending</strong></div>
+        <div class="metric-card"><span>Managed teams</span><strong>32 active</strong></div>
+      </section>
+      <section class="admin-flag-card">
+        <div class="subhead">Flag</div>
+        <div class="flagbox">{{ flag }}</div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

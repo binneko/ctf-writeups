@@ -1,0 +1,8 @@
+services:
+  app:
+    build: .
+    ports:
+      - "5558:5000"
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true

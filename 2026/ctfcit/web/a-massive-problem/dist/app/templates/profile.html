@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profile settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="bg"></div>
+  <main class="shell center page-shell">
+    <section class="panel page-panel wide">
+      <div class="topbar">
+        <div>
+          <div class="brand">Northstar Workspace</div>
+          <h2>Profile settings</h2>
+          <p class="intro-copy">Update your account details and sign in again after saving.</p>
+        </div>
+        <div class="actions">
+          <a class="buttonlink secondary small" href="{{ url_for('dashboard') }}">Dashboard</a>
+          <a class="buttonlink ghost small" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+      </div>
+
+      <div class="grid-two dashboard-grid">
+        <section class="subpanel">
+          <div class="subhead">Account</div>
+          <div class="list-item"><span>Username</span><strong>{{ user['username'] }}</strong></div>
+          <div class="list-item"><span>Current role</span><strong>{{ user['role'] }}</strong></div>
+          <div class="list-item"><span>Workspace</span><strong>Northstar</strong></div>
+        </section>
+        <section class="subpanel">
+          <div class="subhead">Edit details</div>
+          <form id="profileForm" class="stack compact">
+            <input name="full_name" type="text" placeholder="Full name" value="{{ user['full_name'] }}" required>
+            <div class="grid-two form-grid">
+              <input name="title" type="text" placeholder="Job title" value="{{ user['title'] }}" required>
+              <input name="team" type="text" placeholder="Team" value="{{ user['team'] }}" required>
+            </div>
+            <input name="password" type="password" placeholder="New password">
+            <div class="policy">New passwords must meet the same account policy.</div>
+            <button type="submit">Save changes</button>
+          </form>
+          <div id="status" class="status"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+<script>
+const form = document.getElementById('profileForm')
+const statusBox = document.getElementById('status')
+form.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  statusBox.textContent = ''
+  const payload = Object.fromEntries(new FormData(form).entries())
+  if (!payload.password) {
+    delete payload.password
+  }
+  const res = await fetch('/api/profile', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
+  })
+  const data = await res.json()
+  if (!res.ok) {
+    statusBox.textContent = data.error || 'Unable to save profile.'
+    return
+  }
+  window.location.href = data.redirect || '/login'
+})
+</script>
+</body>
+</html>

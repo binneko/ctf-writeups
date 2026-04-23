@@ -3,6 +3,7 @@
 ## 2026
 
 - [0xFUN CTF 2026](./2026/0xfun-ctf/README.md)
+- [CTF@CIT 2026](./2026/ctfcit/README.md)
 - [LA CTF 2026](./2026/la-ctf/README.md)
 - [PascalCTF 2026](./2026/pascalctf/README.md)
 - [TAMUctf 2026](./2026/tamuctf/README.md)

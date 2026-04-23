@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Northstar Workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="bg"></div>
+  <main class="shell split">
+    <section class="panel hero">
+      <div class="brand">Northstar Workspace</div>
+      <h1>Operations software for modern internal teams</h1>
+      <p>Manage onboarding, team access, project updates, and account settings from one place.</p>
+      <div class="chips">
+        <span>Workspace analytics</span>
+        <span>Team profiles</span>
+        <span>Account controls</span>
+      </div>
+      <div class="hero-grid">
+        <div class="mini-card"><strong>184</strong><span>active projects</span></div>
+        <div class="mini-card"><strong>32</strong><span>department teams</span></div>
+        <div class="mini-card"><strong>99.95%</strong><span>service availability</span></div>
+      </div>
+    </section>
+    <section class="panel form-panel">
+      <div class="tabs">
+        <a class="tab active" href="/">Create account</a>
+        <a class="tab" href="{{ url_for('login_page') }}">Sign in</a>
+      </div>
+      <h2>Create your workspace account</h2>
+      <p class="intro-copy">Use your team details to create a new user account.</p>
+      <form id="registerForm" class="stack">
+        <div class="grid-two form-grid">
+          <input name="full_name" type="text" placeholder="Full name" autocomplete="off" required>
+          <input name="username" type="text" placeholder="Username" autocomplete="off" required>
+        </div>
+        <div class="grid-two form-grid">
+          <input name="title" type="text" placeholder="Job title" autocomplete="off" required>
+          <input name="team" type="text" placeholder="Team" autocomplete="off" required>
+        </div>
+        <input name="password" type="password" placeholder="Password" required>
+        <div class="policy">Minimum 8 characters with uppercase, lowercase, number, and symbol.</div>
+        <button type="submit">Create account</button>
+      </form>
+      <div id="status" class="status"></div>
+    </section>
+  </main>
+<script>
+const form = document.getElementById('registerForm')
+const statusBox = document.getElementById('status')
+form.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  statusBox.textContent = ''
+  const payload = Object.fromEntries(new FormData(form).entries())
+  const res = await fetch('/api/register', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
+  })
+  const data = await res.json()
+  if (!res.ok) {
+    statusBox.textContent = data.error || 'Unable to create account.'
+    return
+  }
+  window.location.href = data.redirect || '/login'
+})
+</script>
+</body>
+</html>

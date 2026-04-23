@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="bg"></div>
+  <main class="shell center page-shell">
+    <section class="panel page-panel wide">
+      <div class="topbar">
+        <div>
+          <div class="brand">Vertex Profile</div>
+          <h2>{{ user['full_name'] }}</h2>
+        </div>
+        <div class="actions">
+          <a class="buttonlink secondary small" href="{{ url_for('dashboard') }}">Dashboard</a>
+          {% if user['role'] == 'admin' %}
+          <a class="buttonlink small" href="{{ url_for('admin') }}">Admin</a>
+          {% endif %}
+          <a class="buttonlink ghost small" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+      </div>
+      <div class="grid-two dashboard-grid">
+        <section class="subpanel">
+          <div class="subhead">Current profile</div>
+          <div class="list-item"><span>Username</span><strong>{{ user['username'] }}</strong></div>
+          <div class="list-item"><span>Role</span><strong>{{ user['role'] }}</strong></div>
+          <div class="list-item"><span>Title</span><strong>{{ user['title'] }}</strong></div>
+          <div class="list-item"><span>Region</span><strong>{{ user['region'] }}</strong></div>
+        </section>
+        <section class="subpanel">
+          <div class="subhead">Change profile</div>
+          <form id="profileForm" class="stack compact">
+            <input name="full_name" type="text" placeholder="Full name" value="{{ user['full_name'] }}">
+            <div class="grid-two form-grid">
+              <input name="title" type="text" placeholder="Title" value="{{ user['title'] }}">
+              <input name="region" type="text" placeholder="Region" value="{{ user['region'] }}">
+            </div>
+            <input name="password" type="password" placeholder="New password">
+            <button type="submit">Save changes</button>
+          </form>
+          <div id="status" class="status"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+<script>
+const form = document.getElementById('profileForm')
+const statusBox = document.getElementById('status')
+form.addEventListener('submit', async (e) => {
+  e.preventDefault()
+  statusBox.textContent = ''
+  const payload = Object.fromEntries(new FormData(form).entries())
+  if (!payload.password) {
+    delete payload.password
+  }
+  const res = await fetch('/api/profile', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(payload)
+  })
+  const data = await res.json()
+  if (!res.ok) {
+    statusBox.textContent = 'Profile update failed'
+    return
+  }
+  statusBox.textContent = 'Saved'
+  setTimeout(() => window.location.href = '/login', 700)
+})
+</script>
+</body>
+</html>
