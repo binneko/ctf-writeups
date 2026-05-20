@@ -7,6 +7,7 @@
 - [LA CTF 2026](./2026/la-ctf/README.md)
 - [PascalCTF 2026](./2026/pascalctf/README.md)
 - [TAMUctf 2026](./2026/tamuctf/README.md)
+- [TJCTF 2026](./2026/tjctf/README.md)
 
 ## 2025
 
